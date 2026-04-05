@@ -278,7 +278,7 @@ These DREFS layers are ontology-backed. They are not free labels: they are made 
 
 ## Theories, biases, effects, and related coded layers
 
-The bot can also work with:
+The bot can also work with ontology-linked coded layers beyond the main intervention-description modules. These include:
 
 - **theories**
 - **biases**
@@ -287,14 +287,173 @@ The bot can also work with:
 - **decision models**
 - **stage models**
 
-These are also coded through ontology-linked resources rather than free narrative labels.
+These are not treated as free narrative labels. They are handled through the loaded theory graph and linked ontology evidence. Theory-layer assignment is downstream of problem-pattern normalization and ontology-grounded assignment. It should not be used as the first matching layer.
 
-In the loaded theory graph:
+In the active loaded theory graph:
 
-- **total coded entries:** **339**
+- **total coded entries:** **369**
 
-The bot can assign these only after the problem-pattern-normalization layer is already stable.
+### What this means in practice
 
+The bot can identify whether a stabilized case activates coded theoretical or quasi-theoretical structures. These are stored under **author-coded theory-layer IDs** such as `ENG:000005`, `TG:BIAS006`, `TG:EFF009`, `TG:PAR009`, `TG:DEC001`, and `TG:STG001`. These are not ontology IDs. They are theory-graph IDs. The ontology grounding is provided through the linked **full ontology IDs** inside the coded record.
+
+### Theory example
+
+**Author-coded record**  
+`ENG:000005`  
+**Label:** Universal Law of Generalization  
+**Definition:** States that the generalisation of learned responses decreases as new stimuli become less similar to the original training stimulus.
+
+**Linked ontology-grounding terms**
+
+1. `BCIO:050965.02.06.ma.e`  
+   **Label:** generalisation in learning  
+   **Definition:** <Associative learning> in which prior learning that an antecedent stimulus signals certain consequences of a behaviour spreads beyond the original stimulus conditions.
+
+2. `BCIO:006124.00.01.ma.e`  
+   **Label:** stimulus generalisation in learning  
+   **Definition:** <Generalisation in learning> concerning the antecedent stimulus.
+
+3. `BCIO:050962.00.01.ma.e`  
+   **Label:** response generalisation in learning  
+   **Definition:** <Generalisation in learning> concerning the response.
+
+4. `MeSH:D005838.00.00.ma.e`  
+   **Label:** generalization, psychological  
+   **Definition:** Transfer of a response learned for one stimulus to another stimulus.
+
+**Why this matters**  
+This allows the bot to code transfer not as a loose narrative intuition but as a theory-linked, ontology-grounded generalisation structure.
+
+### Bias example
+
+**Author-coded record**  
+`TG:BIAS006`  
+**Label:** Optimism Bias  
+**Definition:** People underestimate the likelihood of negative events for themselves and overestimate positive outcomes. It supports hope and persistence but can impair risk management.
+
+**Linked ontology-grounding terms**
+
+1. `BCIO:006060.02.03.ma.e`  
+   **Label:** motivational orientation  
+   **Definition:** A <motivational disposition> to be guided by a type of outcome.
+
+2. `BCIO:050607.00.01.ma.r`  
+   **Label:** belief about the positive health consequences of a behaviour  
+   **Definition:** A <belief about health consequences of behaviour> in which the consequences are evaluated as positive.
+
+**Why this matters**  
+The bot can detect that a case is not merely “positive” in tone, but structurally biased toward underweighting risk and overweighting favourable outcomes.
+
+### Effect example
+
+**Author-coded record**  
+`TG:EFF009`  
+**Label:** Zeigarnik Effect  
+**Definition:** Unfinished or interrupted tasks are remembered better and create internal tension until completion. It is used in task design, learning and interfaces and helps explain intrusive thoughts about incomplete work.
+
+**Linked ontology-grounding terms**
+
+1. `BCIO:006136.00.02.e.ma.r`  
+   **Label:** intrinsic motivation  
+   **Definition:** <Autonomous motivation> due to a behaviour's inherent enjoyment, satisfaction or benefits to oneself.
+
+2. `BCIO:009000.00.03.bc.be.d.f.ma.md.p.sd.se.sh.so`  
+   **Label:** behaviour change intervention schedule of delivery  
+   **Definition:** A BCI attribute that involves its temporal organisation.
+
+**Why this matters**  
+The bot can ground incomplete-task tension through ontology-backed constructs rather than treating it as a metaphor.
+
+### Paradox example
+
+**Author-coded record**  
+`TG:PAR009`  
+**Label:** Catch-22  
+**Definition:** A situation where the conditions for escape are logically tied to each other in such a way that a person cannot meet any one condition without already having met another. It captures self-contradictory rules and institutional traps.
+
+**Linked ontology-grounding terms**
+
+1. `BCIO:050963.00.01.ma.f`  
+   **Label:** belief about accountability for the consequences of an action  
+   **Definition:** A <belief about responsibility> about whether one should be accountable for the outcomes of an event.
+
+2. `BCIO:006065.00.12.ma.e`  
+   **Label:** need for autonomy  
+   **Definition:** A <psychological need> to have a sense of personal agency and initiative.
+
+**Why this matters**  
+The bot can code institutional traps and self-blocking rule structures as a paradox-layer pattern, not just as frustration or inconsistency.
+
+### Decision-model example
+
+**Author-coded record**  
+`TG:DEC001`  
+**Label:** Dual Process Theory (System 1 / System 2)  
+**Definition:** Proposes two modes of processing: a fast, automatic, intuitive system (System 1) and a slow, deliberate, analytical system (System 2). Everyday life is dominated by System 1, with System 2 engaged for complex tasks.
+
+**Linked ontology-grounding terms**
+
+1. `MF:0000088.00.38.bc.be.p.ma.md.se.so.sd.d`  
+   **Label:** subliminal process  
+   **Definition:** A <mental process> that involves neuronal activity in response to a sensory stimulus but which is not the subject of conscious awareness.
+
+2. `BCIO:006116.01.04.e.ma.sh`  
+   **Label:** decision-making  
+   **Definition:** <Judging> in which one or more propositions or behaviours are identified as preferred from a larger number.
+
+**Why this matters**  
+The bot can detect when an intervention is aimed at deliberative processing while the actual behavioural driver is automatic processing, or vice versa.
+
+### Stage-model example
+
+**Author-coded record**  
+`TG:STG001`  
+**Label:** Rubicon Model of Action Phases  
+**Definition:** Divides the path from desire to action into phases: pre-decisional (motivation), post-decisional (planning), action and post-action evaluation. Crossing the “Rubicon” (making a decision) shifts focus from weighing pros/cons to implementing plans.
+
+**Linked ontology-grounding terms**
+
+1. `BCIO:050952.02.11.ma.e`  
+   **Label:** willingness to change behaviour  
+   **Definition:** A <bodily disposition> to change one's behaviour.
+
+2. `BCIO:007010.00.17.bc.f`  
+   **Label:** action planning BCT  
+   **Definition:** A <goal directed BCT> that involves making a detailed plan for the performance of the behaviour, which must include at least one of context, frequency, duration or intensity.
+
+3. `BCIO:009000.00.03.bc.be.d.f.ma.md.p.sd.se.sh.so`  
+   **Label:** behaviour change intervention schedule of delivery  
+   **Definition:** A BCI attribute that involves its temporal organisation.
+
+**Why this matters**  
+The bot can distinguish whether a participant is still in the motivational phase, already in the planning phase, or in enactment failure — instead of applying one generic intervention logic to all phases.
+
+### Reverse-query use
+
+The user may explicitly ask the bot to search the stabilized case for theory-layer matches.
+
+Examples of reverse queries:
+
+- `Which theories are active in this case? Output table / author-coded ID / label / definition / linked ontology ID / ontology label / ontology definition / why matched.`
+- `Which biases are active in this case? Output table / author-coded ID / label / definition / linked ontology ID / ontology label / ontology definition / why matched.`
+- `Which effects are active in this case? Output table / author-coded ID / label / definition / linked ontology ID / ontology label / ontology definition / why matched.`
+- `Which paradoxes are active in this case? Output table / author-coded ID / label / definition / linked ontology ID / ontology label / ontology definition / why matched.`
+- `Which decision models are active in this case? Output table / author-coded ID / label / definition / linked ontology ID / ontology label / ontology definition / why matched.`
+- `Which stage models are active in this case? Output table / author-coded ID / label / definition / linked ontology ID / ontology label / ontology definition / why matched.`
+- `Which theories, biases, effects, paradoxes, decision models, and stage models are activated in this case? Group them by type and show only grounded matches with full codification.`
+
+### Important constraint
+
+Theory-layer activation is not the first step in analysis. The correct order is:
+
+1. extract the problem  
+2. break it into patterns  
+3. normalize the patterns  
+4. assign full ontology-grounded IDs  
+5. only then test for theory-layer activation
+
+This is what keeps theory-layer output grounded rather than speculative.
 -----
 
 ## APEASE, COM-B, TDF, interventions, and policies
