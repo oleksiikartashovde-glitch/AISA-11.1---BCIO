@@ -2,6 +2,11 @@
 Bot: [Open AISA 11.1 in ChatGPT](https://chatgpt.com/g/g-69a6ab4b5adc81919a5be72eecbd2f81-aisa-11-1)  
 ## What this bot does
 
+### What is new in the current operational logic
+
+The current operational logic of AISA 11.1 extends earlier ontology-grounded analysis with an explicit design-support layer. In addition to behaviour-level mapping, the system now supports cost-feasibility-first reasoning, design-stage financial screening through Cost per Target Person (CTP), benchmark ratio and Design Feasibility Ratio (DFR), correction-locus identification, transfer assessment, and the BPMS–DREFS intervention-gap layer. These additions do not change the ontology core or the routing architecture. They extend the operational use of the system at the design and decision-support level.
+
+
 This bot supports structured analysis of any system where there is behaviour. It works with published research, intervention descriptions, policy documents, programme materials, case descriptions, technical deployment studies, corporate programmes, and any other material where behaviour and its drivers can be identified.
 
 It can work with any domain: healthcare, retail, HR and workplace programmes, public policy, digital products, education, safety systems, and others.
@@ -31,30 +36,36 @@ Its strengths:
 
 ### BPMS
 
-In this bot, BPMS is a non-standard term specific to this runtime. It refers to the eight BCIO sub-ontology modules that form the intervention-description layer. The abbreviation follows the first letter of each module name:
+BPMS is a non-standard term specific to this runtime. It refers to the core behaviour-design space used in AISA 11.1. The abbreviation follows the first letter of the grouped module names:
 
-- B = Behaviour + BCT (Behaviour Change Technique)
-- P = Population
-- M = Mechanisms of Action + Mode of Delivery
-- S = Source + Setting + Style of Delivery
+* **B** = Behaviour, BCT (Behaviour Change Technique)
+* **P** = Population
+* **M** = Mechanisms of Action, Mode of Delivery
+* **S** = Setting, Source, Style of Delivery
 
-These eight modules are fully published on bciosearch.org. In practical work, final solution breakdown is carried out across all 13 modules — BPMS plus the five DREFS modules (Dose, Reach, Engagement, Fidelity, Schedule).
+These modules form the core behaviour-design layer used before and alongside downstream design-support logic. In practical work, final structured analysis is carried out across all 13 modules — the BPMS layer plus the five DREFS modules (Dose, Reach, Engagement, Fidelity, Schedule).
 
-In practical work, final solution breakdown is carried out across **all 13 modules**, not reduced to only one or two end-stage boxes.
+In this guide, BPMS is treated as runtime-specific operational shorthand. It is not an official BCIO term and should not be treated as ontology doctrine.
+
 
 ### DREFS
 
-**DREFS** is a non-standard term specific to this bot. It is the gap-analysis layer used to explain why target behaviour was or was not achieved.
+**DREFS** is a non-standard term specific to this bot. It is the intervention-gap layer used to explain why target behaviour was or was not achieved.
 
 DREFS is not a published framework. It is an **author-built codification assembled from the internal ontology**. Every term in DREFS has a real ontology ID from BCIO, GO, MeSH, APA, iSci, ADDICTO, MF, MFOEM, or other loaded ontologies. There are no free labels.
 
+Within runtime use, DREFS has a fixed position: after target-behaviour identification and gap detection, and before downstream layers such as COM-B, TDF, APEASE, and full redesign support.
+
 DREFS consists of 5 modules:
 
-- **D** = Dose
-- **R** = Reach
-- **E** = Engagement
-- **F** = Fidelity
-- **S** = Schedule
+* **D** = Dose
+* **R** = Reach
+* **E** = Engagement
+* **F** = Fidelity
+* **S** = Schedule
+
+In this guide, DREFS is treated as runtime-specific intervention-gap codification. It is not official BCIO doctrine.
+
 
 ### DREFS term counts from the index
 
@@ -69,6 +80,24 @@ The following counts are taken directly from the runtime index (`bcio_index.json
 |S — Schedule                     |37            |
 |**Total entries (with overlaps)**|**260**       |
 |**Unique IDs across all DREFS**  |**224**       |
+
+
+### BPMS–DREFS: abbreviation expansion and runtime meaning
+
+| Letter | Modules                                     | Runtime meaning                                                             | Main diagnostic question                                                                             |
+| ------ | ------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **B**  | Behaviour, Behaviour Change Technique (BCT) | Defines the target action and the active technique unit                     | What behaviour is to be changed, and what active technique is being used?                            |
+| **P**  | Population                                  | Defines who is expected to perform the target behaviour                     | In whom or by whom is the target behaviour expected?                                                 |
+| **M**  | Mechanisms of Action, Mode of Delivery      | Defines how change is expected and how it is transmitted                    | Through what mechanism is change expected, and through what delivery mode?                           |
+| **S**  | Setting, Source, Style of Delivery          | Defines context, deliverer, and framing style                               | In what context, by whom, and in what style does the intervention operate?                           |
+| **D**  | Dose                                        | Defines amount or intensity of exposure                                     | Was the amount of intervention sufficient?                                                           |
+| **R**  | Reach                                       | Defines whether the intervention reached the intended population or context | Did the intervention actually reach who and where it needed to?                                      |
+| **E**  | Engagement                                  | Defines active participant interaction                                      | Did participants meaningfully engage with the intervention?                                          |
+| **F**  | Fidelity                                    | Defines whether delivery occurred as intended                               | Was the intervention delivered as designed?                                                          |
+| **S**  | Schedule                                    | Defines timing, sequencing, and spacing                                     | Was the intervention delivered at the right time, in the right sequence, and with the right spacing? |
+
+In BPMS–DREFS, the first **S** belongs to the BPMS layer (**Setting, Source, Style of Delivery**), while the second **S** belongs to DREFS (**Schedule**).
+
 
 ### New codification principles
 
@@ -272,6 +301,7 @@ The bot can assign these only after the problem-pattern-normalization layer is a
 
 The bot can move from ontology-backed problem mapping into the following frameworks:
 
+
 - **APEASE**
   Acceptability, Practicability, Effectiveness, Affordability, Side-effects, Equity.
   Fixed output order: **S, E, Eq, P, A, Af**
@@ -285,6 +315,38 @@ The bot can move from ontology-backed problem mapping into the following framewo
   such as guidelines, service provision, communication/marketing, environmental/social planning, and others where relevant
 
 The user may choose these steps in any controlled order, as long as the requests stay grounded in the parent request and its derived outputs.
+
+## Design-support extensions
+
+### Extended operational sequence
+
+For commissioned programme design and other cases where budget and target population are known before design begins, AISA 11.1 can support the following extended sequence:
+
+1. Define budget and target population
+2. Calculate Cost per Target Person (CTP)
+3. Compare CTP to benchmark ranges and derive the benchmark ratio
+4. Identify the primary correction locus
+5. Apply COM-B and TDF within the constrained space
+6. Conduct transfer assessment between intervention context and target-use context
+7. Apply APEASE and downstream redesign logic
+8. Use DFR where QALY-based ceiling logic is relevant
+
+This sequence is an operational design-support sequence. It is not an ontology revision and should not be treated as official BCIO doctrine.
+
+### Design-stage economic screening
+
+AISA 11.1 can support design-stage economic screening through three practical units:
+
+**Cost per Target Person (CTP)**
+CTP is the planned full-loaded budget divided by the planned target population. It is used prospectively at the design stage.
+
+**Benchmark ratio**
+Benchmark ratio compares the proposed CTP with the benchmark median for the relevant intervention complexity level.
+
+**Design Feasibility Ratio (DFR)**
+DFR compares proposed CTP to a maximum acceptable CTP derived from QALY-based threshold logic, where relevant evidence is available.
+
+These units function as decision-support tools. They do not replace full economic evaluation and are not part of the ontology core.
 
 -----
 
@@ -379,6 +441,7 @@ It is acceptable to choose different starting points depending on the goal:
 
 ## Controlled interaction rule and multi-combinatorics
 
+
 The **parent request** defines the analysis frame. After that, the user may use **free combinatorics of follow-up requests** over the intermediate results produced from the parent request.
 
 This means the user may:
@@ -403,6 +466,46 @@ In practice, the user controls:
 - and recombination of already produced intermediate outputs
 
 The bot does not restart from zero on each follow-up. It carries forward the validated analysis space.
+
+## Correction locus and transfer assessment
+
+### Correction locus
+
+AISA 11.1 supports explicit identification of the correction locus before intervention selection. Not all failures are subject failures. The system can support reasoning across four correction levels:
+
+**Subject correction**
+Used when the primary barrier lies in capability, opportunity, or motivation.
+
+**Intervention correction**
+Used when the mechanism is theoretically sound but delivery is deficient, for example due to wrong dose, reach, engagement, fidelity, or schedule.
+
+**System correction**
+Used when incentives, metrics, procurement logic, or the pathway to the real-world outcome are misaligned.
+
+**Economic-operability correction**
+Used when the design is theoretically sound but unaffordable, unscalable, or structurally incompatible with the available resource envelope.
+
+In addition, transfer gap should be treated as a distinct failure mode between the intervention context and the target-use environment.
+
+| Gap type                 | Where the problem sits                      | Typical response        |
+| ------------------------ | ------------------------------------------- | ----------------------- |
+| Behaviour gap            | Subject                                     | Subject correction      |
+| Intervention design gap  | Intervention                                | Intervention correction |
+| Transfer gap             | Between intervention and target-use context | Transfer correction     |
+| System gap               | Programme or system level                   | System correction       |
+| Economic-operability gap | Budget and scale                            | Economic correction     |
+
+### Transfer assessment
+
+AISA 11.1 can support transfer assessment as a design-stage check. The key question is not only whether a mechanism is activated inside the intervention context, but whether it can transfer into the target-use environment.
+
+A practical transfer assessment asks three questions:
+
+1. What contextual features enable the mechanism in the intervention context?
+2. Which of these features are absent in the target-use context?
+3. What must be bridged, reproduced, or redesigned for the mechanism to survive beyond the intervention setting?
+
+This logic may be described through a Shepard-type transfer analogue: greater contextual distance between intervention context and target-use context implies greater risk of transfer loss. This is a structural analogy used for design support, not a direct mathematical application of Shepard’s law.
 
 -----
 
@@ -518,6 +621,7 @@ The exact order depends on the user’s goal. A common deep-analysis route:
 - **label**
 - **case instantiation in this solution**
 
+
 -----
 
 ## What you can ask at each stage
@@ -566,6 +670,11 @@ The exact order depends on the user’s goal. A common deep-analysis route:
 
 ## Useful refinement commands
 
+**Status note**
+
+The following elements should be understood as runtime design-support logic rather than ontology-core revision: CTP, benchmark ratio, DFR, correction locus, transfer assessment, and BPMS–DREFS. They support operational analysis and decision structuring. They do not modify the ontology core, the module routing core, or official BCIO doctrine.
+
+
 At any point you can say:
 
 - `refine this`
@@ -574,6 +683,7 @@ At any point you can say:
 - `expand the analysis`
 - `rebuild semantically`
 - `do not choose the nearest term too early`
+
 - `show exact / broad / surrogate separately`
 - `do not move on until we validate this step`
 
@@ -1158,3 +1268,13 @@ Coverage note: pages 1–19 covered in page order without cross-page jumping. Pa
 |51  |19  |Correspondence and requests for materials should be addressed to T.-Y.O.                                            |corresponding author / contact source           |Source              |BCIO:010002.00.04.so                           |person source                                           |A person who is the bearer of a behaviour change intervention source role.                                                                                     |
 
 Note: some rows are close-fit ontology assignments rather than exact literal matches, especially for engineering-specific items such as weighted sampling, thresholds, and algorithm specification, because the paper is a technical deployment study and those phrases do not have direct one-to-one labels in the loaded ontology set. The page-18 row is intentionally preserved with empty ontology fields to keep full page coverage.
+
+## When this design-support logic is most relevant
+
+This extended design-support logic is especially relevant when:
+
+* budget and target population are known before design begins
+* intervention options must be screened for affordability before deep diagnostic expansion
+* the likely failure may sit above or beyond the subject level
+* transfer from intervention context to target-use context is a material concern
+* the user needs structured decision support rather than ontology lookup alone
