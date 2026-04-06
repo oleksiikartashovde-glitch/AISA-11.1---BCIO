@@ -1,4 +1,5 @@
 # REFERENCE_UserGuide
+[Quick Guide](https://github.com/oleksiikartashovde-glitch/AISA-11.1-BCIO/blob/main/docs/QUICK_GUIDE.md)
 Bot: [Open AISA 11.1 in ChatGPT](https://chatgpt.com/g/g-69a6ab4b5adc81919a5be72eecbd2f81-aisa-11-1)  
 ## What this bot does
 
