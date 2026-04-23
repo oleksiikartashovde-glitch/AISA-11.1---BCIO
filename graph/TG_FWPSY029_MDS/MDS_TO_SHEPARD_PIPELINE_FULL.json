@@ -1,0 +1,130 @@
+{
+  "protocol_id": "MDS_TO_SHEPARD_PIPELINE_FULL",
+  "scope": [
+    "MDS",
+    "Shepard-stage distance use"
+  ],
+  "object_types": [
+    "TEXT",
+    "IMAGE",
+    "FIGURE",
+    "LABEL",
+    "MIXED"
+  ],
+  "cross_modal_pairs": [
+    "TEXT-IMAGE",
+    "IMAGE-TEXT",
+    "TEXT-FIGURE",
+    "FIGURE-TEXT",
+    "IMAGE-LABEL",
+    "LABEL-IMAGE",
+    "FIGURE-LABEL",
+    "LABEL-FIGURE",
+    "MIXED-anything",
+    "anything-MIXED"
+  ],
+  "inputs": {
+    "objects": "list",
+    "object_type": "mapping",
+    "dissimilarity_source_type": [
+      "MATRIX",
+      "PAIR_TABLE",
+      "ORDINAL_PAIRS",
+      "FUNCTION"
+    ],
+    "target_dimensions": "integer",
+    "shared_space_flag": "boolean",
+    "coordinate_structure": [
+      "HOLISTIC_CONTINUOUS",
+      "ADDITIVE_FEATURES",
+      "UNCERTAIN"
+    ],
+    "initialization_mode": [
+      "RANDOM",
+      "PCA_INIT"
+    ],
+    "missing_data_mode": [
+      "STOP",
+      "IGNORE_OBSERVED_ONLY"
+    ],
+    "mds_mode": [
+      "METRIC",
+      "NONMETRIC"
+    ],
+    "stopping_rules": {
+      "max_iterations": "integer",
+      "stress_threshold": "number",
+      "relative_stress_change_threshold": "number"
+    },
+    "shepard_rule": "function_or_rule"
+  },
+  "distance_metrics": {
+    "EUCLIDEAN": "dij = sqrt(sum((xil-xjl)^2))",
+    "CITY_BLOCK": "dij = sum(abs(xil-xjl))",
+    "MINKOWSKI": "dij = (sum(abs(xil-xjl)^r))^(1/r)"
+  },
+  "metric_selection": {
+    "HOLISTIC_CONTINUOUS": "EUCLIDEAN",
+    "ADDITIVE_FEATURES": "CITY_BLOCK",
+    "UNCERTAIN": "MINKOWSKI_by_lowest_normalized_stress"
+  },
+  "fit_functions": {
+    "raw_stress": "S* = sum((dij-dhatij)^2)",
+    "normalized_stress": "S = sqrt(sum((dij-dhatij)^2)/sum(dij^2))"
+  },
+  "distance_normalization": {
+    "rule": "d_norm(i,j) = d_ij / d_max",
+    "range": [
+      0,
+      1
+    ],
+    "meaning": {
+      "0": "coincidence_or_zero_distance",
+      "1": "maximum_distance_in_current_analysis"
+    }
+  },
+  "constraints": {
+    "diagonal_zero": true,
+    "symmetric_matrix": true,
+    "cross_modal_requires_shared_space": true,
+    "automatic_imputation_allowed": false,
+    "hidden_metric_switching_allowed": false
+  },
+  "outputs": {
+    "coordinates_table": [
+      "object_id",
+      "object_type",
+      "dim_1",
+      "dim_2",
+      "...",
+      "dim_t"
+    ],
+    "distance_table": [
+      "object_a",
+      "object_b",
+      "pair_type",
+      "input_dissimilarity",
+      "recovered_distance_raw",
+      "recovered_distance_norm",
+      "abs_difference_raw",
+      "abs_difference_norm"
+    ],
+    "fit_table": [
+      "raw_stress",
+      "normalized_stress",
+      "iterations",
+      "selected_metric",
+      "selected_dimensions",
+      "initialization_mode",
+      "missing_data_mode",
+      "mds_mode"
+    ],
+    "shepard_table": [
+      "object_a",
+      "object_b",
+      "recovered_distance_raw",
+      "recovered_distance_norm",
+      "shepard_similarity"
+    ]
+  }
+}
